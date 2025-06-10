@@ -18,9 +18,39 @@
 
 ## 📖 Visão Geral
 
+Este projeto foi desenvolvido como material de estudo para a disciplina de Banco de Dados, focando em:
+
+-   **Modelagem de Banco de Dados**: Criação de tabelas com relacionamentos
+-   **Comandos DDL**: CREATE, ALTER, DROP
+-   **Comandos DML**: INSERT, UPDATE, DELETE
+-   **Consultas SQL**: SELECT com JOINs, subconsultas e funções de agregação
+-   **Integridade Referencial**: Chaves primárias e estrangeiras
+
 ## 🎯 Objetivos de Aprendizado
 
-## 🗂️ Estrutura do Projeto
+-   ✅ Criar e gerenciar bancos de dados relacionais
+-   ✅ Implementar relacionamentos entre tabelas
+-   ✅ Escrever consultas SQL complexas com múltiplas junções
+-   ✅ Utilizar funções de agregação e agrupamento
+-   ✅ Aplicar filtros e condições avançadas
+-   ✅ Manter a integridade dos dados
+
+## 🗂️ Estrutura do Projeto (Esperado)
+
+```
+bdTraining/
+├── README.md                 # Este guia de estudos
+├── docs/
+│   ├── querys.sql           # Todas as consultas SQL do exercício
+│   ├── schema.sql           # Script de criação do banco e tabelas
+│   ├── data.sql             # Script de inserção de dados
+│   └── exercises/           # Exercícios organizados por tópico
+│       ├── ddl-commands.md  # Comandos de definição de dados
+│       ├── dml-commands.md  # Comandos de manipulação de dados
+│       └── advanced-queries.md # Consultas avançadas
+└── assets/
+    └── diagrams/            # Diagramas ER e de relacionamento
+```
 
 ## 💾 Modelagem do Banco de Dados
 
@@ -28,13 +58,78 @@
 
 #### 👨‍🎓 ALUNOS
 
+| Campo  | Tipo         | Descrição                     |
+| ------ | ------------ | ----------------------------- |
+| RA     | INT PK       | Registro Acadêmico (Identity) |
+| Nome   | VARCHAR(200) | Nome completo do aluno        |
+| Cidade | VARCHAR(40)  | Cidade de residência          |
+
 #### 📚 DISCIPLINA
+
+| Campo            | Tipo         | Descrição                       |
+| ---------------- | ------------ | ------------------------------- |
+| codigodisciplina | INT PK       | Código da disciplina (Identity) |
+| disciplina       | VARCHAR(100) | Nome da disciplina              |
+| cargahoraria     | FLOAT        | Carga horária em horas          |
 
 #### 👨‍🏫 PROFESSOR
 
+| Campo           | Tipo         | Descrição                      |
+| --------------- | ------------ | ------------------------------ |
+| codigoprofessor | INT PK       | Código do professor (Identity) |
+| nome            | VARCHAR(100) | Nome completo do professor     |
+| cidade          | VARCHAR(40)  | Cidade de residência           |
+
 #### 📊 HISTORICO
 
+| Campo            | Tipo   | Descrição                      |
+| ---------------- | ------ | ------------------------------ |
+| codigohistorico  | INT PK | Código do histórico (Identity) |
+| ra               | INT FK | Referência ao aluno            |
+| codigodisciplina | INT FK | Referência à disciplina        |
+| codigoprofessor  | INT FK | Referência ao professor        |
+| semestre         | INT    | Semestre cursado               |
+| faltas           | INT    | Número de faltas               |
+| nota             | FLOAT  | Nota obtida                    |
+| ano              | INT    | Ano letivo                     |
+
 ### 🔗 Relacionamentos
+
+```mermaid
+erDiagram
+    ALUNOS {
+        int RA PK
+        varchar Nome
+        varchar Cidade
+    }
+
+    DISCIPLINA {
+        int codigodisciplina PK
+        varchar disciplina
+        float cargahoraria
+    }
+
+    PROFESSOR {
+        int codigoprofessor PK
+        varchar nome
+        varchar cidade
+    }
+
+    HISTORICO {
+        int codigohistorico PK
+        int ra FK
+        int codigodisciplina FK
+        int codigoprofessor FK
+        int semestre
+        int faltas
+        float nota
+        int ano
+    }
+
+    ALUNOS ||--o{ HISTORICO : "possui"
+    DISCIPLINA ||--o{ HISTORICO : "é cursada em"
+    PROFESSOR ||--o{ HISTORICO : "leciona em"
+```
 
 ## 📝 Exercícios Práticos
 
