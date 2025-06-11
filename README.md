@@ -135,13 +135,75 @@ erDiagram
 
 ### 🏗️ Parte 1: Criação da Estrutura
 
+1. **Criação do Banco de Dados** - [Ver código](sql/schema.sql)
+2. **Definição de Tabelas e Relacionamentos** - [Ver diagrama](assets/diagrams/modelo-er.md)
+3. **Inserção de Dados de Teste** - [Ver código](sql/data.sql)
+
 ### 🔍 Parte 2: Consultas Básicas
+
+4. **Filtros Simples** - Alunos com nota < 5 em BD
+5. **Alteração de Estrutura** - Adição do campo ano
+6. **Atualização de Dados** - Definir anos nos históricos
 
 ### 🔗 Parte 3: Consultas com JOINs
 
+7. **JOIN Simples** - Professores de BD em 2020
+8. **Agregação** - Quantidade de disciplinas por professor
+9. **Múltiplos JOINs** - Consultas complexas com 3+ tabelas
+
 ### 📊 Parte 4: Consultas Avançadas
 
+10. **Subconsultas** - Histórico específico de alunos
+11. **Filtros Complexos** - Múltiplas condições
+12. **Relatórios** - Consultas para tomada de decisão
+
 ### 📁 Arquivos de Estudo
+
+#### 📚 Material Principal
+
+-   [📋 Todas as 14 consultas da atividade](docs/atividade-completa.sql)
+-   [🏗️ Comandos DDL explicados](docs/exercises/ddl-commands.md)
+-   [📊 Comandos DML explicados](docs/exercises/dml-commands.md)
+-   [🔍 Consultas avançadas explicadas](docs/exercises/advanced-queries.md)
+
+#### 🎯 Preparação para Prova
+
+-   [⚡ Cola da prova - Consulta rápida](docs/cola-prova.md)
+-   [📝 Simulado completo de prova](docs/simulado-prova.md)
+-   [💪 Exercícios extras para prática](docs/exercises/exercicios-extras.md)
+
+### 🚀 Recursos Adicionais
+
+#### 📝 Scripts Úteis
+
+```sql
+-- Backup rápido de uma tabela
+SELECT * INTO ALUNOS_BACKUP FROM ALUNOS;
+
+-- Verificar estrutura de uma tabela
+EXEC sp_columns 'ALUNOS';
+
+-- Verificar relacionamentos
+SELECT * FROM INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS;
+```
+
+#### 🔧 Comandos de Diagnóstico
+
+```sql
+-- Verificar tamanho das tabelas
+SELECT
+    t.NAME AS TableName,
+    p.rows AS RowCounts
+FROM sys.tables t
+INNER JOIN sys.partitions p ON t.object_id = p.OBJECT_ID
+WHERE p.index_id < 2
+ORDER BY p.rows DESC;
+
+-- Verificar índices
+SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID('ALUNOS');
+```
+
+---
 
 ## 🔧 Como Executar
 
@@ -259,7 +321,7 @@ ORDER BY colunas_de_ordenação;
 ### 📝 Padrões de Escrita
 
 ```sql
--- Sempre use este padrão para facilitar a leitura
+-- Sempre usar este padrão para facilitar a leitura
 SELECT DISTINCT
     A.campo1,
     B.campo2
