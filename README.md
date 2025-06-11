@@ -161,7 +161,7 @@ erDiagram
 
 #### 📚 Material Principal
 
--   [📋 Todas as 14 consultas da atividade](docs/atividade-completa.sql)
+-   [📋 Todas as 14 consultas da atividade](sql/querys.sql)
 -   [🏗️ Comandos DDL explicados](docs/exercises/ddl-commands.md)
 -   [📊 Comandos DML explicados](docs/exercises/dml-commands.md)
 -   [🔍 Consultas avançadas explicadas](docs/exercises/advanced-queries.md)
